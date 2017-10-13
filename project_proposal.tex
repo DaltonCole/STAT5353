@@ -1,0 +1,50 @@
+\documentclass[times]{article}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage[none]{hyphenat}
+\usepackage{amsmath}
+\usepackage[us]{datetime}
+\usepackage[explicit]{titlesec}
+\usepackage{url}
+\begin{document}
+	\title{Stat 5353  - Fall 2017 \\ Project Proposal}
+	\author{Dalton Cole \\ Adam Harter \\ Samuel Richter}
+	\date{\formatdate{13}{10}{2017}}
+	\maketitle
+	
+	For this project, we propose applying k-means clustering to the UCI heart disease data set \cite{ref:uci}. Our factors will be: distance formula used and number of clusters formed. The three levels of distance formulas will be: euclidean distance, manhattan distance, and chebychev distance. The three levels of the number of clusers will be 2, 3, and 5. The purpose of the number of clusers is that the data set has 5 different levels of heart disease. Zero represents no heart disease, and 1-5 represents different levels of heart disease. Since this is a completely randomized design, we will have to replicate the experiment twice. The initial starting points for each cluster will be determined randomly, thus introducing "environmental" error. The response variable of this experiment is the resulting sum squared error of the clusters.
+
+	We will be using the nltk libary in python to perform k-means \cite{ref:nltk}. After creating the model, we will test the model against a set aside test set. The sum of squared error or the actual value and the predicted value will be the final result. Table \ref{tab:anova} shows the corresponding ANOVA table.
+
+	\begin{table}[!h]
+		\centering
+		\caption{ANOVA Table}
+		\label{tab:anova}
+		\begin{tabular}{| c | c | c | c | c |}
+			\hline
+			Source 					& d.f.	& SS	& MS 	& F-ratio \\
+			\hline
+			Treatment Combinations	& 8		& $SS_{Treat Comb}$	& $MS_{Treat Comb}$	& $F_{Trt}$		\\
+			\hline
+			Number of Clusters (NC)	& 2		& $SS_{NC}$			& $MS_{NC}$			& $F_{NC}$ 		\\
+			\hline
+			Distance Formula (DF)	& 2		& $SS_{DF}$			& $MS_{DF}$			& $F_{DF}$ 		\\
+			\hline
+			NC * DF					& 4 	& $SS_{NC DF}$		& $MS_{NC DF}$		& $F_{NC DF}$ 	\\
+			\hline
+			Error					& 9 	& SSE				& MSE				& 				\\
+			\hline
+			Total					& 17 	& SSTotal			& 					& 				\\
+			\hline
+		\end{tabular}
+	\end{table}
+
+	\medskip
+	\bibliographystyle{plain}
+	\bibliography{bib}
+
+\end{document}
