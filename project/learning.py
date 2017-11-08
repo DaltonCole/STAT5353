@@ -1,7 +1,7 @@
 import csv 		# Convert to spreadsheet format
 import sys
 import numpy
-#from jarcard_similarity import jarcard_similarity
+from jarcard_similarity import jarcard_similarity
 from sum_of_squares import SSE
 from nltk.cluster.kmeans import KMeansClusterer # Kmeans
 from nltk.cluster.util import cosine_distance, euclidean_distance # Distances (cosine, euclidean)
@@ -65,16 +65,15 @@ print("EUCLIDEAN")
 
 for c in cluster_sizes:
 	# Make cluasters
-	cluster = KMeansClusterer(c, distance=euclidean_distance, repeats=10, avoid_empty_clusters=True)
+	cluster = KMeansClusterer(c, distance=euclidean_distance, repeats=1, avoid_empty_clusters=True)
 	assigned = cluster.cluster(data, assign_clusters=True)
-	print(assigned)
-
+	
 	if c == 2:
 		# Find majority class
 		majority_a = [0,0]
 		majority_b = [0,0]
 		for original, a in zip(answer, assigned):
-			if original == 0 and a =0 0:
+			if original == 0 and a == 0:
 				majority_a[0] += 1
 			elif original == 0 and a != 0:
 				majority_a[1] += 1
@@ -82,69 +81,396 @@ for c in cluster_sizes:
 				majority_b[0] += 1
 			elif original != 0 and a != 0:
 				majority_b[1] += 1
-		
-	# SSE
-	#total_sse, sse = SSE(data, assigned, c)
-	#print(total_sse)
-	#print(sse)
-	#print()
+		print(majority_a)
+		print(majority_b)
 
-	
+		s = 0
+		s += max(majority_a)
+		s += max(majority_b)
 
-quit()
-euclidean_k_clusters = KMeansClusterer(NUM_CLUSTERS, distance=euclidean_distance, repeats=1000)
-assigned_clusters_euclidean = euclidean_k_clusters.cluster(article_word_frequency, assign_clusters=True)
-print((assigned_clusters_euclidean))
+		print("Number correct for c=2: {}".format(s))
 
-### SSE
-euclidean_total_SSE, euclidean_SSE = SSE(article_word_frequency, assigned_clusters_euclidean, NUM_CLUSTERS)
-print(euclidean_total_SSE)
-print(euclidean_SSE)
+	if c == 3:
+		# Find majority class
+		majority_a = [0,0,0]
+		majority_b = [0,0,0]
+		majority_c = [0,0,0]
+		for original, a in zip(answer, assigned):
+			if original == 0 and a == 0:
+				majority_a[0] += 1
+			elif original == 0 and a == 1:
+				majority_a[1] += 1
+			elif original == 0 and a == 2:
+				majority_a[2] += 1
 
-### How correct were we?
-correct = [0] * 5
-for a_type in range(len(article_type_numeric)):
-	for ty, cluster in zip(article_type_numeric[a_type], assigned_clusters_euclidean):
-		if ty == cluster:
-			correct[a_type] += 1
-print(correct)
-print(max(correct), '%')
+			elif original == 4 and a == 0:
+				majority_c[0] += 1
+			elif original == 4 and a == 1:
+				majority_c[1] += 1
+			elif original == 4 and a == 2:
+				majority_c[2] += 1
+
+
+			elif a == 0:
+				majority_b[0] += 1
+			elif a == 1:
+				majority_b[1] += 1
+			elif a == 2:
+				majority_b[2] += 1
+
+		print(majority_a)
+		print(majority_b)
+		print(majority_c)
+		print("Number correct for c=3: {}".format(max(majority_a) + max(majority_b) + max(majority_c)))
+
+	if c == 5:
+		# Find majority class
+		majority_a = [0,0,0,0,0]
+		majority_b = [0,0,0,0,0]
+		majority_c = [0,0,0,0,0]
+		majority_d = [0,0,0,0,0]
+		majority_e = [0,0,0,0,0]
+		for original, a in zip(answer, assigned):
+			if original == 0 and a == 0:
+				majority_a[0] += 1
+			elif original == 0 and a == 1:
+				majority_a[1] += 1
+			elif original == 0 and a == 2:
+				majority_a[2] += 1
+			elif original == 0 and a == 3:
+				majority_a[3] += 1
+			elif original == 0 and a == 4:
+				majority_a[4] += 1
+
+			elif original == 1 and a == 0:
+				majority_b[0] += 1
+			elif original == 1 and a == 1:
+				majority_b[1] += 1
+			elif original == 1 and a == 2:
+				majority_b[2] += 1
+			elif original == 1 and a == 3:
+				majority_b[3] += 1
+			elif original == 1 and a == 4:
+				majority_b[4] += 1
+
+			elif original == 2 and a == 0:
+				majority_c[0] += 1
+			elif original == 2 and a == 1:
+				majority_c[1] += 1
+			elif original == 2 and a == 2:
+				majority_c[2] += 1
+			elif original == 2 and a == 3:
+				majority_c[3] += 1
+			elif original == 2 and a == 4:
+				majority_c[4] += 1
+
+			elif original == 3 and a == 0:
+				majority_d[0] += 1
+			elif original == 3 and a == 1:
+				majority_d[1] += 1
+			elif original == 3 and a == 2:
+				majority_d[2] += 1
+			elif original == 3 and a == 3:
+				majority_d[3] += 1
+			elif original == 3 and a == 4:
+				majority_d[4] += 1
+
+			elif original == 4 and a == 0:
+				majority_e[0] += 1
+			elif original == 4 and a == 1:
+				majority_e[1] += 1
+			elif original == 4 and a == 2:
+				majority_e[2] += 1
+			elif original == 4 and a == 3:
+				majority_e[3] += 1
+			elif original == 4 and a == 4:
+				majority_e[4] += 1
+
+			
+
+		print(majority_a)
+		print(majority_b)
+		print(majority_c)
+		print(majority_d)
+		print(majority_e)
+		print("Number correct c=5: {}".format(max(majority_a) + max(majority_b) + max(majority_c) + max(majority_d) + max(majority_e)))
+
+
+	print()
+
 
 #################################################### Cosine Kmeans ####################################################
 print("COSINE")
-cosine_k_clusters = KMeansClusterer(NUM_CLUSTERS, distance=cosine_distance, repeats=1000)
-assigned_clusters_cosine = cosine_k_clusters.cluster(article_word_frequency, assign_clusters=True)
-print(assigned_clusters_cosine)
 
-cosine_total_SSE, cosine_SSE = SSE(article_word_frequency, assigned_clusters_cosine, NUM_CLUSTERS)
-print(cosine_total_SSE)
-print(cosine_SSE)
+for c in cluster_sizes:
+	# Make cluasters
+	cluster = KMeansClusterer(c, distance=cosine_distance, repeats=1, avoid_empty_clusters=True)
+	assigned = cluster.cluster(data, assign_clusters=True)
+	
+	if c == 2:
+		# Find majority class
+		majority_a = [0,0]
+		majority_b = [0,0]
+		for original, a in zip(answer, assigned):
+			if original == 0 and a == 0:
+				majority_a[0] += 1
+			elif original == 0 and a != 0:
+				majority_a[1] += 1
+			elif original != 0 and a == 0:
+				majority_b[0] += 1
+			elif original != 0 and a != 0:
+				majority_b[1] += 1
+		print(majority_a)
+		print(majority_b)
 
-### How correct were we?
-correct = [0] * 5
-for a_type in range(len(article_type_numeric)):
-	for ty, cluster in zip(article_type_numeric[a_type], assigned_clusters_cosine):
-		if ty == cluster:
-			correct[a_type] += 1
-print(correct)
-print(max(correct), '%')
+		s = 0
+		s += max(majority_a)
+		s += max(majority_b)
 
+		print("Number correct for c=2: {}".format(s))
+
+	if c == 3:
+		# Find majority class
+		majority_a = [0,0,0]
+		majority_b = [0,0,0]
+		majority_c = [0,0,0]
+		for original, a in zip(answer, assigned):
+			if original == 0 and a == 0:
+				majority_a[0] += 1
+			elif original == 0 and a == 1:
+				majority_a[1] += 1
+			elif original == 0 and a == 2:
+				majority_a[2] += 1
+
+			elif original == 4 and a == 0:
+				majority_c[0] += 1
+			elif original == 4 and a == 1:
+				majority_c[1] += 1
+			elif original == 4 and a == 2:
+				majority_c[2] += 1
+
+
+			elif a == 0:
+				majority_b[0] += 1
+			elif a == 1:
+				majority_b[1] += 1
+			elif a == 2:
+				majority_b[2] += 1
+
+		print(majority_a)
+		print(majority_b)
+		print(majority_c)
+		print("Number correct for c=3: {}".format(max(majority_a) + max(majority_b) + max(majority_c)))
+
+	if c == 5:
+		# Find majority class
+		majority_a = [0,0,0,0,0]
+		majority_b = [0,0,0,0,0]
+		majority_c = [0,0,0,0,0]
+		majority_d = [0,0,0,0,0]
+		majority_e = [0,0,0,0,0]
+		for original, a in zip(answer, assigned):
+			if original == 0 and a == 0:
+				majority_a[0] += 1
+			elif original == 0 and a == 1:
+				majority_a[1] += 1
+			elif original == 0 and a == 2:
+				majority_a[2] += 1
+			elif original == 0 and a == 3:
+				majority_a[3] += 1
+			elif original == 0 and a == 4:
+				majority_a[4] += 1
+
+			elif original == 1 and a == 0:
+				majority_b[0] += 1
+			elif original == 1 and a == 1:
+				majority_b[1] += 1
+			elif original == 1 and a == 2:
+				majority_b[2] += 1
+			elif original == 1 and a == 3:
+				majority_b[3] += 1
+			elif original == 1 and a == 4:
+				majority_b[4] += 1
+
+			elif original == 2 and a == 0:
+				majority_c[0] += 1
+			elif original == 2 and a == 1:
+				majority_c[1] += 1
+			elif original == 2 and a == 2:
+				majority_c[2] += 1
+			elif original == 2 and a == 3:
+				majority_c[3] += 1
+			elif original == 2 and a == 4:
+				majority_c[4] += 1
+
+			elif original == 3 and a == 0:
+				majority_d[0] += 1
+			elif original == 3 and a == 1:
+				majority_d[1] += 1
+			elif original == 3 and a == 2:
+				majority_d[2] += 1
+			elif original == 3 and a == 3:
+				majority_d[3] += 1
+			elif original == 3 and a == 4:
+				majority_d[4] += 1
+
+			elif original == 4 and a == 0:
+				majority_e[0] += 1
+			elif original == 4 and a == 1:
+				majority_e[1] += 1
+			elif original == 4 and a == 2:
+				majority_e[2] += 1
+			elif original == 4 and a == 3:
+				majority_e[3] += 1
+			elif original == 4 and a == 4:
+				majority_e[4] += 1
+
+			
+
+		print(majority_a)
+		print(majority_b)
+		print(majority_c)
+		print(majority_d)
+		print(majority_e)
+		print("Number correct c=5: {}".format(max(majority_a) + max(majority_b) + max(majority_c) + max(majority_d) + max(majority_e)))
+
+
+	print()
 
 #################################################### Jarcard Kmeans ####################################################
 print("JARCARD")
-jarcard_k_clusters = KMeansClusterer(NUM_CLUSTERS, distance=jarcard_similarity, repeats=25)
-assigned_clusters_jarcard = jarcard_k_clusters.cluster(article_word_frequency, assign_clusters=True)
-print(assigned_clusters_jarcard)
 
-jarcard_total_SSE, jarcard_SSE = SSE(article_word_frequency, assigned_clusters_jarcard, NUM_CLUSTERS)
-print(jarcard_total_SSE)
-print(jarcard_SSE)
+for c in cluster_sizes:
+	# Make cluasters
+	cluster = KMeansClusterer(c, distance=jarcard_similarity, repeats=1, avoid_empty_clusters=True)
+	assigned = cluster.cluster(data, assign_clusters=True)
+	
+	if c == 2:
+		# Find majority class
+		majority_a = [0,0]
+		majority_b = [0,0]
+		for original, a in zip(answer, assigned):
+			if original == 0 and a == 0:
+				majority_a[0] += 1
+			elif original == 0 and a != 0:
+				majority_a[1] += 1
+			elif original != 0 and a == 0:
+				majority_b[0] += 1
+			elif original != 0 and a != 0:
+				majority_b[1] += 1
+		print(majority_a)
+		print(majority_b)
 
-### How correct were we?
-correct = [0] * 5
-for a_type in range(len(article_type_numeric)):
-	for ty, cluster in zip(article_type_numeric[a_type], assigned_clusters_jarcard):
-		if ty == cluster:
-			correct[a_type] += 1
-print(correct)
-print(max(correct), '%')
+		s = 0
+		s += max(majority_a)
+		s += max(majority_b)
+
+		print("Number correct for c=2: {}".format(s))
+
+	if c == 3:
+		# Find majority class
+		majority_a = [0,0,0]
+		majority_b = [0,0,0]
+		majority_c = [0,0,0]
+		for original, a in zip(answer, assigned):
+			if original == 0 and a == 0:
+				majority_a[0] += 1
+			elif original == 0 and a == 1:
+				majority_a[1] += 1
+			elif original == 0 and a == 2:
+				majority_a[2] += 1
+
+			elif original == 4 and a == 0:
+				majority_c[0] += 1
+			elif original == 4 and a == 1:
+				majority_c[1] += 1
+			elif original == 4 and a == 2:
+				majority_c[2] += 1
+
+
+			elif a == 0:
+				majority_b[0] += 1
+			elif a == 1:
+				majority_b[1] += 1
+			elif a == 2:
+				majority_b[2] += 1
+
+		print(majority_a)
+		print(majority_b)
+		print(majority_c)
+		print("Number correct for c=3: {}".format(max(majority_a) + max(majority_b) + max(majority_c)))
+
+	if c == 5:
+		# Find majority class
+		majority_a = [0,0,0,0,0]
+		majority_b = [0,0,0,0,0]
+		majority_c = [0,0,0,0,0]
+		majority_d = [0,0,0,0,0]
+		majority_e = [0,0,0,0,0]
+		for original, a in zip(answer, assigned):
+			if original == 0 and a == 0:
+				majority_a[0] += 1
+			elif original == 0 and a == 1:
+				majority_a[1] += 1
+			elif original == 0 and a == 2:
+				majority_a[2] += 1
+			elif original == 0 and a == 3:
+				majority_a[3] += 1
+			elif original == 0 and a == 4:
+				majority_a[4] += 1
+
+			elif original == 1 and a == 0:
+				majority_b[0] += 1
+			elif original == 1 and a == 1:
+				majority_b[1] += 1
+			elif original == 1 and a == 2:
+				majority_b[2] += 1
+			elif original == 1 and a == 3:
+				majority_b[3] += 1
+			elif original == 1 and a == 4:
+				majority_b[4] += 1
+
+			elif original == 2 and a == 0:
+				majority_c[0] += 1
+			elif original == 2 and a == 1:
+				majority_c[1] += 1
+			elif original == 2 and a == 2:
+				majority_c[2] += 1
+			elif original == 2 and a == 3:
+				majority_c[3] += 1
+			elif original == 2 and a == 4:
+				majority_c[4] += 1
+
+			elif original == 3 and a == 0:
+				majority_d[0] += 1
+			elif original == 3 and a == 1:
+				majority_d[1] += 1
+			elif original == 3 and a == 2:
+				majority_d[2] += 1
+			elif original == 3 and a == 3:
+				majority_d[3] += 1
+			elif original == 3 and a == 4:
+				majority_d[4] += 1
+
+			elif original == 4 and a == 0:
+				majority_e[0] += 1
+			elif original == 4 and a == 1:
+				majority_e[1] += 1
+			elif original == 4 and a == 2:
+				majority_e[2] += 1
+			elif original == 4 and a == 3:
+				majority_e[3] += 1
+			elif original == 4 and a == 4:
+				majority_e[4] += 1
+
+			
+
+		print(majority_a)
+		print(majority_b)
+		print(majority_c)
+		print(majority_d)
+		print(majority_e)
+		print("Number correct c=5: {}".format(max(majority_a) + max(majority_b) + max(majority_c) + max(majority_d) + max(majority_e)))
+
+
+	print()
