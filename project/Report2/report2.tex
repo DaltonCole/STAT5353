@@ -1,0 +1,89 @@
+\documentclass[times]{article}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage[none]{hyphenat}
+\usepackage{amsmath}
+\usepackage[us]{datetime}
+\usepackage[explicit]{titlesec}
+\usepackage{url}
+\begin{document}
+	\title{Stat 5353  - Fall 2017 \\ Preliminary Report}
+	\author{Dalton Cole \\ Adam Harter \\ Samuel Richter}
+	\date{\formatdate{14}{11}{2017}}
+	\maketitle
+	
+	Our analysis of variance, Table \ref{tab:anova}, shows that there a statistically significant difference in the means of the treatment combinations, so we can say that the experimental variables tested have an effect on the response variable. Our next course of action will be to do further analysis on the data to determine what, if any, individual or interaction effects the experimental variables have on the output, using effects tests to determine significance of effects and comparisons of means using Tukey’s test to determine which means are significantly different from others. From this data, we will conclude the best combination of treatment effects to maximize the output, in order to find which distance metric and number of clusters will result in the greatest number of correct answers output by the machine learning algorithm.
+
+	The data used to run the statistical analysis is shown in Table \ref{tab:data}.
+
+
+
+	\begin{table}[!h]
+		\centering
+		\caption{ANOVA Table}
+		\label{tab:anova}
+		\begin{tabular}{| c | c | c | c | c |}
+			\hline
+			Source 					& d.f.	& SS		& MS 		& F-ratio 	\\
+			\hline
+			Model					& 8		& 16247.444	& 2030.93	& 44.4189	\\
+			\hline
+			Error					& 9		& 411.500	& 45.72		& Prob $>$ F	\\
+			\hline
+			Combination Total		& 17	& 16658.944	& 			& $<$.0001 	\\
+			\hline
+		\end{tabular}
+	\end{table}
+
+	\begin{table}[!h]
+		\centering
+		\caption{Experimental Data}
+		\label{tab:data}
+		\begin{tabular}{| c | c | c |}
+			\hline
+			Distance Metric		& Number of Clusters	& Number Correct 	\\
+			\hline
+			Euclidean			& 2						& 180				\\
+			\hline
+			Euclidean			& 3						& 139				\\
+			\hline
+			Euclidean			& 5						& 105				\\
+			\hline
+			Cosine				& 2						& 184				\\
+			\hline
+			Cosine				& 3						& 149				\\
+			\hline
+			Cosine				& 5						& 104				\\
+			\hline
+			Jaccard				& 2						& 176				\\
+			\hline
+			Jaccard				& 3						& 151				\\
+			\hline
+			Jaccard				& 5						& 108				\\
+			\hline
+			Euclidean			& 2						& 180				\\
+			\hline
+			Euclidean			& 3						& 138				\\
+			\hline
+			Euclidean			& 5						& 99				\\
+			\hline
+			Cosine				& 2						& 186				\\
+			\hline
+			Cosine				& 3						& 137				\\
+			\hline
+			Cosine				& 5						& 101				\\
+			\hline
+			Jaccard				& 2						& 174				\\
+			\hline
+			Jaccard				& 3						& 136				\\
+			\hline
+			Jaccard				& 5						& 128				\\
+			\hline
+		\end{tabular}
+	\end{table}
+
+\end{document}
