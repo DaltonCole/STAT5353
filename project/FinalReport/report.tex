@@ -1,0 +1,194 @@
+\documentclass[times]{article}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage[none]{hyphenat}
+\usepackage{amsmath}
+\usepackage[us]{datetime}
+\usepackage[explicit]{titlesec}
+\usepackage{url}
+
+% Dataset: http://archive.ics.uci.edu/ml/datasets/Heart+Disease
+
+\begin{document}
+   \title{Stat 5353  - Fall 2017 \\ Final Report}
+   \author{Dalton Cole \\ Adam Harter \\ Samuel Richter}
+   \date{\formatdate{3}{12}{2017}}
+   \maketitle
+   
+   \section{Introduction}
+
+   In this experiment, k-means clustering was applied to the UCI heart disease data 
+   set\footnote{http://archive.ics.uci.edu/ml/datasets/Heart+Disease}, with the factors 
+   being the distance formula used and the number of clusters formed.  
+   The three levels for the distance formula used were Euclidean distance, 
+   Manhattan distance, and Chebyshev distance.  
+   The three levels for the number of clusters were 2, 3, and 5.  
+   The response variable of interest is the resulting sum squared error of the clusters.
+
+   \section{Design}
+
+   The design of the experiment was a completely randomized design.
+   To achieve this, every possible combination of the factors was run in random order,
+   with each combination being run twice.
+   The initial starting points for each cluster was also initialized randomly.
+   ``Environmental Error'' is introduced by randomly choosing data points to train on and
+   data points to test against.
+
+   \section{Procedure and Data Collection}
+
+   The collection of the data for this experiment was trivial, as all data was taken from the
+   UCI heart disease data set.
+   Each data point contains 14 used attributes, which are as follows:
+
+   \begin{enumerate}
+      % reduce spacing between items
+      \itemsep0em
+      \item Age
+      \item Sex
+      \item Chest Pain Type
+      \item Resting Blood Pressure
+      \item Cholesterol Level
+      \item Fasting Blood Sugar $>$ 120 mg/dl
+      \item Resting ECG Results (normal, ST-T wave abnormality, left ventricular hypertrophy)
+      \item Maximum heart rate achieved
+      \item Exercise induced Angina
+      \item ST Depression Induced by Exercise Relative to Rest
+      \item Slope of Peak Exercise ST Segment (up-sloping, flat, down-sloping)
+      \item Number of Major Vessels Colored by Flourosopy
+      \item Thalassemia
+      \item Diagnosis of Heart Disease
+   \end{enumerate}
+
+   To perform k-means clustering, the Python library 
+   nltk\footnote{http://www.nltk.org/\_modules/nltk/cluster/kmeans.html} was used.
+
+   \section{Analysis of Results}
+
+   \begin{table}[!ht]
+      \centering
+      \caption{ANOVA Table}
+      \label{tab:anova}
+      \begin{tabular}{| c | c | c | c | c |}
+         \hline
+         Source              & d.f.   & SS        & MS      & F-ratio    \\
+         \hline
+         Model               & 8      & 16247.444 & 2030.93 & 44.4189    \\
+         \hline
+         Error               & 9      & 411.500   & 45.72   & Prob $>$ F \\
+         \hline
+         Combination Total   & 17     & 16658.944 &         & $<$.0001   \\
+         \hline
+      \end{tabular}
+   \end{table}
+
+   \begin{table}[!ht]
+      \centering
+      \caption{Effect Tests}
+      \label{tab:effect}
+      \begin{tabular}{| c | c | c | c | c | c |}
+         \hline
+         Source & 
+            Nparm & DF &        SS & F Ratio  & Prob $>$ F \\
+         \hline
+         Number of Clusters &
+            2     & 2  & 15786.111 & 172.6306 & $<$.0001 \\
+         \hline
+         Distance Metric &
+            2     & 2  &   100.000 &   1.0936 & 0.3757 \\
+         \hline
+         Distance Metric * Number of Clusters &
+            4     & 4  &   374.222 &   2.0462 & 0.1711 \\
+         \hline
+      \end{tabular}
+   \end{table}
+
+   \begin{table}[!ht]
+      \centering
+      \caption{Experimental Data}
+      \label{tab:data}
+      \begin{tabular}{| c | c | c |}
+         \hline
+         Distance Metric   & Number of Clusters   & Number Correct \\
+         \hline
+         Euclidean         & 2                    & 180            \\
+         \hline
+         Euclidean         & 3                    & 139            \\
+         \hline
+         Euclidean         & 5                    & 105            \\
+         \hline
+         Cosine            & 2                    & 184            \\
+         \hline
+         Cosine            & 3                    & 149            \\
+         \hline
+         Cosine            & 5                    & 104            \\
+         \hline
+         Jaccard           & 2                    & 176            \\
+         \hline
+         Jaccard           & 3                    & 151            \\
+         \hline
+         Jaccard           & 5                    & 108            \\
+         \hline
+         Euclidean         & 2                    & 180            \\
+         \hline
+         Euclidean         & 3                    & 138            \\
+         \hline
+         Euclidean         & 5                    & 99             \\
+         \hline 
+         Cosine            & 2                    & 186            \\
+         \hline
+         Cosine            & 3                    & 137            \\
+         \hline
+         Cosine            & 5                    & 101            \\
+         \hline
+         Jaccard           & 2                    & 174            \\
+         \hline
+         Jaccard           & 3                    & 136            \\
+         \hline
+         Jaccard           & 5                    & 128            \\
+         \hline
+      \end{tabular}
+   \end{table}
+
+   \section{Conclusion}
+
+   The ANOVA table can be found in Table~\ref{tab:anova}.
+   Using $\alpha = 0.05$, the different combinations of factors was significant, as
+   Prob $>$ F $<$ .0001, which is less than 0.05.
+   Using the effect tests table, found in Table~\ref{tab:effect}, several things can be concluded.
+   There is no interaction between the Distance Metric and the Number
+   of Clusters, as Prob $>$ F = 0.1711, which is greater than 0.05.
+   The Distance Metric was also not significant as Prob $>$ F = .3757, which is greater than 0.05.
+   The number of clusters, however, was significant, as Prob $>$ F $<$ .0001, which is less than 0.05.
+   Grouping the number of correct diagnoses by cluster size, shown in Table~\ref{tab:by_cluster},
+   shows that having two clusters produced the most accurate predictor.
+
+   TODO: Tukey's test and all that - make sure they are statistically distinct.
+         Don't do regression because of the way clusters work and explain why it wasn't done.
+   
+   \begin{table}[!ht]
+      \centering
+      \caption{Number Correct by Cluster Size}
+      \label{tab:by_cluster}
+      \begin{tabular}{| c | c |}
+         \hline
+         Number of Clusters & Number Correct \\
+         \hline
+         2 & 1080 \\
+         \hline
+         3 & 849 \\
+         \hline
+         5 & 645 \\
+         \hline
+      \end{tabular}
+   \end{table}
+
+   \appendix
+   \section{List of Data}
+
+   TODO: Put data here
+
+\end{document}
