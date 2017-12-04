@@ -10,6 +10,9 @@
 \usepackage[us]{datetime}
 \usepackage[explicit]{titlesec}
 \usepackage{url}
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{rotating}
 
 % Dataset: http://archive.ics.uci.edu/ml/datasets/Heart+Disease
 
@@ -68,7 +71,7 @@
 
    \section{Analysis of Results}
 
-   \begin{table}[!ht]
+   \begin{table}[H]
       \centering
       \caption{ANOVA Table}
       \label{tab:anova}
@@ -85,7 +88,7 @@
       \end{tabular}
    \end{table}
 
-   \begin{table}[!ht]
+   \begin{table}[H]
       \centering
       \caption{Effect Tests}
       \label{tab:effect}
@@ -106,7 +109,7 @@
       \end{tabular}
    \end{table}
 
-   \begin{table}[!ht]
+   \begin{table}[H]
       \centering
       \caption{Experimental Data}
       \label{tab:data}
@@ -152,6 +155,51 @@
          \hline
       \end{tabular}
    \end{table}
+   
+   \begin{table}[H]
+      \centering
+      \caption{Tukey's test ($\alpha = 0.05$)}
+      \label{tab:tukey}
+      \newcommand{\singlecol}[1]{\multicolumn{1}{c|}{#1}}
+      \newcommand{\doline}{\cline{2-5}}
+      \begin{tabular}{ c | l | S | S | S |}
+         \multicolumn{1}{c}{} & \multicolumn{4}{c}{LSMean[j]} \\
+         \doline
+         \parbox[t]{2mm}{\multirow{16}{*}{\rotatebox[origin=c]{90}{LSMean[i]}}}
+         & Mean[i] - Mean[j] & \singlecol{2} & \singlecol{3} & \singlecol{5} \\
+         & Std Err Dif & & & \\
+         & Lower CL Dif & & & \\
+         & Upper CL Dif & & & \\
+         \doline
+         & 2 & 0 & 38.3333 & 72.5 \\
+         &   & 0 & 3.90394 & 3.90394 \\
+         &   & 0 & 27.4335 & 61.6002 \\
+         &   & 0 & 49.2332 & 83.3998 \\
+         \doline
+         & 3 & -38.333 & 0 & 34.1667 \\
+         &   & 3.90394 & 0 & 3.90394 \\
+         &   & -49.244 & 0 & 23.2668 \\
+         &   & -27.433 & 0 & 45.0665 \\
+         \doline
+         & 5 & -72.5 & -34.167 & 0 \\
+         &   & 3.90394 & 3.90394 & 0 \\
+         &   & -83.4 & -45.067 & 0 \\
+         &   & -61.6 & -23.267 & 0 \\
+         \doline
+      \end{tabular}
+      
+      \begin{tabular}{| c | c | c | c | c |}
+         \hline
+         Level &   &   &   & Least Sq Mean \\
+         \hline
+         2     & A &   &   & 180.00000 \\
+         \hline
+         3     &   & B &   & 141.66667 \\
+         \hline
+         5     &   &   & C & 107.50000 \\
+         \hline
+      \end{tabular}
+   \end{table}
 
    \section{Conclusion}
 
@@ -163,13 +211,12 @@
    of Clusters, as Prob $>$ F = 0.1711, which is greater than 0.05.
    The Distance Metric was also not significant as Prob $>$ F = .3757, which is greater than 0.05.
    The number of clusters, however, was significant, as Prob $>$ F $<$ .0001, which is less than 0.05.
-   Grouping the number of correct diagnoses by cluster size, shown in Table~\ref{tab:by_cluster},
-   shows that having two clusters produced the most accurate predictor.
-
-   TODO: Tukey's test and all that - make sure they are statistically distinct.
-         Don't do regression because of the way clusters work and explain why it wasn't done.
+   Each number of clusters was statistically distinct and having two clusters produced the most 
+   accurate predictor, as shown in Table~\ref{tab:by_cluster} and Table~\ref{tab:tukey}.  
+   Tukey's test was performed on the number of clusters instead of a regression as the number of
+   clusters is discrete, and not continuous.
    
-   \begin{table}[!ht]
+   \begin{table}[H]
       \centering
       \caption{Number Correct by Cluster Size}
       \label{tab:by_cluster}
