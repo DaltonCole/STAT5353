@@ -28,7 +28,7 @@
    set\footnote{http://archive.ics.uci.edu/ml/datasets/Heart+Disease}, with the factors 
    being the distance formula used and the number of clusters formed.  
    The three levels for the distance formula used were Euclidean distance, 
-   Manhattan distance, and Chebyshev distance.  
+   cosine distance, and Jaccard distance.  
    The three levels for the number of clusters were 2, 3, and 5.  
    The response variable of interest is the resulting sum squared error of the clusters.
 
@@ -43,9 +43,10 @@
 
    \section{Procedure and Data Collection}
 
-   The collection of the data for this experiment was trivial, as all data was taken from the
-   UCI heart disease data set.
-   Each data point contains 14 used attributes, which are as follows:
+   To collect data, k-means clustering was performed used the Python library
+   nltk\footnote{http://www.nltk.org/\_modules/nltk/cluster/kmeans.html}.
+   The data for the k-means clustering itself was taken from the UCI heart disease
+   data set and each point contained 14 used attributes, which are as follows:
 
    \begin{enumerate}
       % reduce spacing between items
@@ -65,9 +66,6 @@
       \item Thalassemia
       \item Diagnosis of Heart Disease
    \end{enumerate}
-
-   To perform k-means clustering, the Python library 
-   nltk\footnote{http://www.nltk.org/\_modules/nltk/cluster/kmeans.html} was used.
 
    \section{Analysis of Results}
 
