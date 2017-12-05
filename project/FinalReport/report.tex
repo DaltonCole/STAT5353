@@ -67,6 +67,8 @@
       \item Diagnosis of Heart Disease
    \end{enumerate}
 
+   The full list of data used can be found in Table~\ref{tab:raw_data}
+
    \section{Analysis of Results}
 
    \begin{table}[H]
@@ -103,53 +105,6 @@
          \hline
          Distance Metric * Number of Clusters &
             4     & 4  &   374.222 &   2.0462 & 0.1711 \\
-         \hline
-      \end{tabular}
-   \end{table}
-
-   \begin{table}[H]
-      \centering
-      \caption{Experimental Data}
-      \label{tab:data}
-      \begin{tabular}{| c | c | c |}
-         \hline
-         Distance Metric   & Number of Clusters   & Number Correct \\
-         \hline
-         Euclidean         & 2                    & 180            \\
-         \hline
-         Euclidean         & 3                    & 139            \\
-         \hline
-         Euclidean         & 5                    & 105            \\
-         \hline
-         Cosine            & 2                    & 184            \\
-         \hline
-         Cosine            & 3                    & 149            \\
-         \hline
-         Cosine            & 5                    & 104            \\
-         \hline
-         Jaccard           & 2                    & 176            \\
-         \hline
-         Jaccard           & 3                    & 151            \\
-         \hline
-         Jaccard           & 5                    & 108            \\
-         \hline
-         Euclidean         & 2                    & 180            \\
-         \hline
-         Euclidean         & 3                    & 138            \\
-         \hline
-         Euclidean         & 5                    & 99             \\
-         \hline 
-         Cosine            & 2                    & 186            \\
-         \hline
-         Cosine            & 3                    & 137            \\
-         \hline
-         Cosine            & 5                    & 101            \\
-         \hline
-         Jaccard           & 2                    & 174            \\
-         \hline
-         Jaccard           & 3                    & 136            \\
-         \hline
-         Jaccard           & 5                    & 128            \\
          \hline
       \end{tabular}
    \end{table}
@@ -234,6 +189,64 @@
    \appendix
    \section{List of Data}
 
-   TODO: Put data here
+   \begin{table}[H]
+      \centering
+      \caption{Experimental Data}
+      \label{tab:data}
+      \begin{tabular}{| c | c | c |}
+         \hline
+         Distance Metric   & Number of Clusters   & Number Correct \\
+         \hline
+         Euclidean         & 2                    & 180            \\
+         \hline
+         Euclidean         & 3                    & 139            \\
+         \hline
+         Euclidean         & 5                    & 105            \\
+         \hline
+         Cosine            & 2                    & 184            \\
+         \hline
+         Cosine            & 3                    & 149            \\
+         \hline
+         Cosine            & 5                    & 104            \\
+         \hline
+         Jaccard           & 2                    & 176            \\
+         \hline
+         Jaccard           & 3                    & 151            \\
+         \hline
+         Jaccard           & 5                    & 108            \\
+         \hline
+         Euclidean         & 2                    & 180            \\
+         \hline
+         Euclidean         & 3                    & 138            \\
+         \hline
+         Euclidean         & 5                    & 99             \\
+         \hline 
+         Cosine            & 2                    & 186            \\
+         \hline
+         Cosine            & 3                    & 137            \\
+         \hline
+         Cosine            & 5                    & 101            \\
+         \hline
+         Jaccard           & 2                    & 174            \\
+         \hline
+         Jaccard           & 3                    & 136            \\
+         \hline
+         Jaccard           & 5                    & 128            \\
+         \hline
+      \end{tabular}
+   \end{table}
+
+   \begin{table}[H]
+      \centering
+      \caption{Heart Diesease Data}
+      \label{tab:raw_data}
+      \begin{tabular}{rrrrrrrrrrrrrr}
+         \hline
+         Age & Sex & Chest Pain & Blood Pressure & Cholesterol & Blood Sugar & 
+            ECG & Heart rate & Angina & ST Depression & ST Slope & Major Vessels 
+            & Thalassemia & Diagnosis \\
+         \hline
+         \input{raw.txt}
+      \end{tabular}
 
 \end{document}
