@@ -13,6 +13,8 @@
 \usepackage{siunitx}
 \usepackage{multirow}
 \usepackage{rotating}
+\usepackage{longtable}
+\usepackage{lscape}
 
 % Dataset: http://archive.ics.uci.edu/ml/datasets/Heart+Disease
 
@@ -236,17 +238,19 @@
       \end{tabular}
    \end{table}
 
-   \begin{table}[H]
-      \centering
-      \caption{Heart Diesease Data}
-      \label{tab:raw_data}
-      \begin{tabular}{rrrrrrrrrrrrrr}
+   \begin{landscape}
+      \scriptsize
+      \begin{longtable}{|rrrrrrrrrrrrrr|}
+         \caption{Heart Diesease Data}
+         \label{tab:raw_data}
          \hline
          Age & Sex & Chest Pain & Blood Pressure & Cholesterol & Blood Sugar & 
             ECG & Heart rate & Angina & ST Depression & ST Slope & Major Vessels 
             & Thalassemia & Diagnosis \\
+         \endhead
          \hline
          \input{raw.txt}
-      \end{tabular}
+      \end{longtable}
+   \end{landscape}
 
 \end{document}
